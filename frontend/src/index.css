@@ -1,5 +1,13 @@
-html, body, #root, .App {
+html,
+body,
+#root,
+.App {
+    height: 100vh;
+}
+
+.container {
     height: 100%;
+    overflow: overlay;
 }
 
 body {
@@ -10,4 +18,5 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background: url("./assets/background-icon.svg") no-repeat hsla(221, 39%, 11%, 1);
     color: #fff;
+    background-position: bottom left;
 }

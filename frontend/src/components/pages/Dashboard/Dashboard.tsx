@@ -54,6 +54,7 @@ function useDashboard(params: { year: number }) {
 
         return axios
             .get<unknown>(endpoint(`reports/${params.year}`))
+            .then(res => res.data)
             .then((response) => {
                 if (!resType.is(response)) {
                     console.error(PathReporter.report(resType.decode(response)).join(", "));
@@ -83,7 +84,7 @@ const Dashboard = () => {
         case "Rejected":
             return <ErrorView message={state.error} onClickRetry={actions.fetchReport} />;
         case "Resolved":
-            return <TableView {...state} />;
+            return <TableView {...state} refresh={actions.fetchReport} />;
         default:
             assertNever(state);
             return <></>;

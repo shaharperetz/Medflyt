@@ -14,6 +14,7 @@ import { Report } from "../Dashboard";
 interface Props {
     report: Report;
     isRefreshing: boolean;
+    refresh: () => void;
 }
 
 const Header = styled(Center)`
@@ -37,6 +38,7 @@ const StyledTableView = styled.div`
 const { Table, Tr, Th, Td } = TableBlocks;
 
 const TableView = (props: Props) => {
+
     return (
         <StyledTableView>
             <RefreshIndicator isRefreshing={props.isRefreshing} />
@@ -47,7 +49,7 @@ const TableView = (props: Props) => {
             <Row justifyContent="flex-end">
                 <Button>
                     <RefreshIcon />
-                    <span>Refresh</span>
+                    <span onClick={props.refresh}>Refresh</span>
                 </Button>
             </Row>
             <Table>
@@ -63,7 +65,7 @@ const TableView = (props: Props) => {
                             <Td>{caregiver.name}</Td>
                             <Td>
                                 {caregiver.patients.length > 0 ? (
-                                    caregiver.patients
+                                    caregiver.patients.map((patient ,idx) => <span key={idx}>{patient}{idx === caregiver.patients.length -1 ? '.' : ', ' }</span>)
                                 ) : (
                                     <None />
                                 )}
